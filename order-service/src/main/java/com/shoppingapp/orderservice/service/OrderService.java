@@ -1,10 +1,10 @@
 package com.shoppingapp.orderservice.service;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.shoppingapp.orderservice.dto.OrderLineItemDto;
 import com.shoppingapp.orderservice.dto.OrderRequest;
@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class OrderService {
 
     private final OrderRepository orderRepository;
