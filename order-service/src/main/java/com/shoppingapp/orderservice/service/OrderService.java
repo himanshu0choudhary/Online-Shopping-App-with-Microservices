@@ -4,7 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import com.netflix.discovery.shared.Applications;
+import com.netflix.eureka.EurekaServerContextHolder;
+import com.netflix.eureka.registry.PeerAwareInstanceRegistry;
 import com.shoppingapp.orderservice.dto.InventoryResponse;
+import jakarta.ws.rs.core.Application;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +28,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeOrder(OrderRequest orderRequest){
         Order order = new Order();
@@ -44,9 +48,9 @@ public class OrderService {
 
 
         // Check if item is in stock
-        InventoryResponse[] inventoryResponseArray = webClient.get()
+        InventoryResponse[] inventoryResponseArray = webClientBuilder.build().get()
                 .uri(
-                        "http://localhost:8082/api/inventory",
+                        "http://inventory-service/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode",skuCodes).build()
                 )
                 .retrieve()
