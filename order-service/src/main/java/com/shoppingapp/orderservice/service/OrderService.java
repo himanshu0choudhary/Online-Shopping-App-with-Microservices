@@ -4,11 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-import com.netflix.discovery.shared.Applications;
-import com.netflix.eureka.EurekaServerContextHolder;
-import com.netflix.eureka.registry.PeerAwareInstanceRegistry;
 import com.shoppingapp.orderservice.dto.InventoryResponse;
-import jakarta.ws.rs.core.Application;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
